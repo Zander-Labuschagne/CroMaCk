@@ -13,7 +13,6 @@ public:
 	int a;
 public slots:
 	void convert_clicked(const QString& file_path);
-	void handle_process_error(QProcess::ProcessError error);
 signals:
 	void conversion_done();
 };
