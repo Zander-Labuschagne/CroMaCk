@@ -2,7 +2,6 @@
 
 #include <QProcess>
 #include <QDebug>
-#include <QThread>
 
 #include "mainwindow.hpp"
 
@@ -13,12 +12,14 @@ MainWindow::MainWindow()
 
 void MainWindow::convert_clicked(const QString &file_path)
 {
+	std::cout << file_path.mid(7, file_path.lastIndexOf('/') - 7).toStdString() << std::endl;
+	QString file_directory_path = file_path.mid(7, file_path.lastIndexOf('/') - 7);
 	QProcess *process = new QProcess(this);
 	connect(process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(handle_process_error(QProcess::ProcessError)));
 
 ////	process1.start("echo myPass");
-	process->setWorkingDirectory("/home/zander/MediaConverter");
-//	process->setProcessChannelMode(QProcess::ForwardedChannels); //kopper alle std output aan cout en cerr <- volgens dokumentasie
+	process->setWorkingDirectory(file_directory_path);
+//	process->setProcessChannelMode(QProcess::ForwardedChannels); //koppel alle std output aan cout en cerr <- volgens dokumentasie
 	connect(process, &QProcess::readyReadStandardError, [process]()->void{
 			std::cout << "Output: "<< process->readAllStandardError().toStdString() << std::endl;
 		});
