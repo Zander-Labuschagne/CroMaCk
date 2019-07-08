@@ -3,6 +3,7 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.2
 import QtQml 2.12
+import Cryogen.MainWindow 1.0
 
 
 Window {
@@ -11,6 +12,10 @@ Window {
 	width: 640;
 	height: 480;
 	title: qsTr("CroMaCk");
+
+	MainWindow {
+		id: main_window;
+	}
 
 	//signals
 	signal convert(string file_path);
@@ -40,22 +45,23 @@ Window {
 		height: 720;
 //		nameFilters: [ "Image files (*.jpg *.png)", "All files (*)" ]
 		onAccepted: {
-			console.log("You chose: " + fileDialog.fileUrl)
-//			Qt.quit()
+			//console.log("You chose: " + fileDialog.fileUrl)
+			filename_label.text = file_dialog.fileUrl.toString().substring(file_dialog.fileUrl.toString().lastIndexOf('/') + 1, file_dialog.fileUrl.toString().length);
+			//TODO: Check somehow if the file is valid
+			convert_button.enabled = true; //TODO: If the file is valid as checked above
 		}
 		onRejected: {
 			console.log("Canceled")
 //			file_dialog.close();
-//			Qt.quit()
 		}
 //		Component.onCompleted: visible = true
 	}
 
 	Button {
 		id: open_button;
-		x: 320;
-		y: 50;
-		text: "open media"
+		x: 20;
+		y: 150;
+		text: "Load Media"
 		onClicked: {
 			file_dialog.open();
 		}
@@ -63,14 +69,28 @@ Window {
 
 	Button {
 		id: convert_button;
-		x: 320;
-		y: 100;
-		text: "convert media"
+		enabled: false;
+		x: 20;
+		y: 200;
+		text: "Start Conversion"
 		onClicked: {
-//			convert("UndulatusAsperatus.mp4", "/sa/sa/");
-//			convert(file_dialog.fileUrl, "/sa/sa/");
-//			convert("UndulatusAsperatus.mp4", file_dialog.fileUrl.substring(8, 10/*file_dialog.fileUrl.lastIndexOf('/')*/));
 			convert(file_dialog.fileUrl);
 		}
+	}
+
+	Label {
+		id: filename_label;
+		x: open_button.x + open_button.width + 30;
+		y: open_button.y + open_button.height - 25;
+		text: "... Load a media file by clicking the load button to the left.";
+	}
+
+	ProgressBar {
+		id: conversion_progressbar;
+		x: convert_button.x;
+		y: convert_button.y + convert_button.height + 10;
+		width: 500;
+		height: 70;
+		value: main_window.progress;
 	}
 }

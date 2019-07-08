@@ -13,6 +13,8 @@ int main(int argc, char *argv[])
 
 	QGuiApplication app(argc, argv);
 
+	qmlRegisterType<MainWindow>("Cryogen.MainWindow", 1, 0, "MainWindow");
+
 	MainWindow mw;
 
 	QQmlApplicationEngine engine;
