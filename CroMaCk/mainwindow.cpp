@@ -116,25 +116,25 @@ void MainWindow::convert_clicked(const QString &file_path)
 
 float MainWindow::calculate_progress(std::string stdoutput_string, unsigned int media_duration)
 {
-	//TODO: Find index of "time="
-	std::string time_progress_hours = stdoutput_string.substr(47, 2);
-	std::string time_progress_minutes = stdoutput_string.substr(50, 2);
-	std::string time_progress_seconds = stdoutput_string.substr(53, 2);
+	std::size_t start_index_of_time_indication = stdoutput_string.find("time=");
+	if (start_index_of_time_indication != std::string::npos) {
+		std::string time_progress_hours = stdoutput_string.substr(start_index_of_time_indication + 5, 2);
+		std::string time_progress_minutes = stdoutput_string.substr(start_index_of_time_indication + 8, 2);
+		std::string time_progress_seconds = stdoutput_string.substr(start_index_of_time_indication + 11, 2);
+		std::cerr << time_progress_hours << ":" << time_progress_minutes << ":" << time_progress_seconds << std::endl;
+		std::cerr << media_duration << std::endl;
+		short hours = std::stoi(time_progress_hours);
+		short minutes = std::stoi(time_progress_minutes);
+		short seconds = std::stoi(time_progress_seconds);
+		unsigned int total_in_seconds = 0;
 
-	std::cerr << time_progress_hours << ":" << time_progress_minutes << ":" << time_progress_seconds << std::endl;
-
-	std::cerr << media_duration << std::endl;
-	short hours = std::stoi(time_progress_hours);
-	short minutes = std::stoi(time_progress_minutes);
-	short seconds = std::stoi(time_progress_seconds);
-	unsigned int total_in_seconds = 0;
-
-	if (hours >= 0 && minutes >= 0 && seconds >= 0) {
-		//std::cerr << hours << ":" << minutes << ":" << seconds << std::endl;
-		total_in_seconds = seconds + minutes * 60 + hours * 3600;
-		std::cerr << total_in_seconds << std::endl;
-		std::cerr << (float)total_in_seconds / (float)media_duration << std::endl;
-		return (float)total_in_seconds / (float)media_duration;
+		if (hours >= 0 && minutes >= 0 && seconds >= 0) {
+			//std::cerr << hours << ":" << minutes << ":" << seconds << std::endl;
+			total_in_seconds = seconds + minutes * 60 + hours * 3600;
+			std::cerr << total_in_seconds << std::endl;
+			std::cerr << (float)total_in_seconds / (float)media_duration << std::endl;
+			return (float)total_in_seconds / (float)media_duration;
+		}
 	}
 
 	return 0;
