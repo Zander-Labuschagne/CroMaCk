@@ -1,0 +1,4 @@
+/home/zander/CLionProjects/CroMaCk/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/zander/CLionProjects/CroMaCk/cmake-build-debug/CMakeFiles/CroMaCk.dir
+/home/zander/CLionProjects/CroMaCk/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/zander/CLionProjects/CroMaCk/cmake-build-debug/CMakeFiles/CroMaCk_autogen.dir

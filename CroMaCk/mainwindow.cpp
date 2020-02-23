@@ -55,8 +55,8 @@ void MainWindow::read_total_time(const QString &file_path, const QString &file_d
 	connect(process, SIGNAL(error(QProcess::ProcessError)), this, SLOT(handle_process_error()));
 	process->setWorkingDirectory(file_directory_path);
 	connect(process, &QProcess::readyReadStandardOutput, [process, this]()->void {
-		std::string ffprobe_standard_output = process->readAllStandardOutput().toStdString();
-		this->set_total_time(std::round(std::stod(ffprobe_standard_output)));
+	    std::string ffprobe_standard_output = process->readAllStandardOutput().toStdString();
+	    this->set_total_time(std::round(std::stod(ffprobe_standard_output)));
 	});
 
 	connect(process, SIGNAL(finished(int)), process, SLOT(deleteLater()));
@@ -85,15 +85,15 @@ void MainWindow::convert_clicked(const QString &file_path)
 	process->setWorkingDirectory(file_directory_path);
 //	process->setProcessChannelMode(QProcess::ForwardedChannels); //koppel alle std output aan cout en cerr <- volgens dokumentasie
 	connect(process, &QProcess::readyReadStandardError, [process, this]()->void {
-		std::string ffmpeg_standard_output = process->readAllStandardError().toStdString();
-		std::cout << "ffmpeg Standard Output: " << ffmpeg_standard_output << std::endl;
-		//this->set_progress(calculate_progress(process->readAllStandardError().toStdString()));
-		if (ffmpeg_standard_output.substr(0, 6) == "frame="){
-			this->set_progress(MainWindow::calculate_progress(ffmpeg_standard_output, this->get_total_time()));
-			emit progressUpdated();
-			this->thread()->eventDispatcher()->processEvents(QEventLoop::AllEvents);
-			std::cerr << this->get_progress() << std::endl;
-		}
+	    std::string ffmpeg_standard_output = process->readAllStandardError().toStdString();
+	    std::cout << "ffmpeg Standard Output: " << ffmpeg_standard_output << std::endl;
+	    //this->set_progress(calculate_progress(process->readAllStandardError().toStdString()));
+	    if (ffmpeg_standard_output.substr(0, 6) == "frame="){
+		    this->set_progress(MainWindow::calculate_progress(ffmpeg_standard_output, this->get_total_time()));
+		    emit progressUpdated();
+		    this->thread()->eventDispatcher()->processEvents(QEventLoop::AllEvents);
+		    std::cerr << this->get_progress() << std::endl;
+	    }
 	});
 
 	connect(process, SIGNAL(finished(int)), process, SLOT(deleteLater()));

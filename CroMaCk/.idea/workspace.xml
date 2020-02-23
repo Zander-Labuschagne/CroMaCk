@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="CroMaCk" targetName="CroMaCk" />
+      <config projectName="CroMaCk" targetName="CroMaCk_autogen" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d283d703-9609-4504-a09e-4056cc5c95b0" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileColors">
+    <fileColor scope="Non-Project Files (Material Default)" color="2E3C43" />
+    <fileColor scope="Non-Project Files (Material Darker)" color="323232" />
+    <fileColor scope="Non-Project Files (Material Lighter)" color="eae8e8" />
+    <fileColor scope="Non-Project Files (Material Palenight)" color="2f2e43" />
+  </component>
+  <component name="ProjectId" id="1YDgkisb4v9ztHZxXCIU1ooiEhD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="/mansion/zander/Qt/Tools/QtCreator/bin/qtcreator" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
+  </component>
+  <component name="RunManager" selected="CMake Application.CroMaCk">
+    <configuration name="CroMaCk" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CroMaCk" TARGET_NAME="CroMaCk" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CroMaCk" RUN_TARGET_NAME="CroMaCk">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CroMaCk_autogen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CroMaCk" TARGET_NAME="CroMaCk_autogen" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.CroMaCk" />
+      <item itemvalue="CMake Application.CroMaCk_autogen" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d283d703-9609-4504-a09e-4056cc5c95b0" name="Default Changelist" comment="" />
+      <created>1582482723881</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582482723881</updated>
+      <workItem from="1582482730845" duration="170000" />
+      <workItem from="1582482916049" duration="1739000" />
+      <workItem from="1582484698872" duration="2576000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="560" y="187" width="800" height="701" key="#New_File_Extensions" timestamp="1582485739648">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="560" y="187" width="800" height="701" key="#New_File_Extensions/0.0.1920.1080@0.0.1920.1080" timestamp="1582485739648" />
+    <state x="690" y="378" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582486547420">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="690" y="378" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1582486547420" />
+    <state x="1027" y="545" key="#com.intellij.tools.ToolEditorDialog" timestamp="1582486324649">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1027" y="545" key="#com.intellij.tools.ToolEditorDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1582486324649" />
+    <state x="1047" y="473" width="424" height="508" key="FileChooserDialogImpl" timestamp="1582486323496">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="1047" y="473" width="424" height="508" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1582486323496" />
+    <state x="768" y="291" width="982" height="754" key="SettingsEditor" timestamp="1582486373906">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="768" y="291" width="982" height="754" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1582486373906" />
+  </component>
+</project>
