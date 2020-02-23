@@ -59,7 +59,6 @@ void MainWindow::read_total_time(const QString &file_path, const QString &file_d
 	process->setWorkingDirectory(file_directory_path);
 	connect(process, &QProcess::readyReadStandardOutput, [process, this]()->void {
 		std::string ffprobe_standard_output = process->readAllStandardOutput().toStdString();
-		std::cerr << "ffprobe Standard Output: " << ffprobe_standard_output << std::endl;
 		this->set_total_time(std::round(std::stod(ffprobe_standard_output)));
 	});
 
@@ -68,8 +67,6 @@ void MainWindow::read_total_time(const QString &file_path, const QString &file_d
 	QString ffprobe = "ffprobe";
 	QString source_file = " -i " + file_path;
 	QString ffprobe_params = " -show_entries format=duration -v quiet -of csv=p=0";
-
-	std::cerr << ffprobe.toStdString() << source_file.toStdString() << ffprobe_params.toStdString() << std::endl;
 
 	process->start(ffprobe + source_file + ffprobe_params);
 
@@ -94,7 +91,6 @@ void MainWindow::convert_clicked(const QString &file_path)
 		std::string ffmpeg_standard_output = process->readAllStandardError().toStdString();
 		std::cout << "ffmpeg Standard Output: " << ffmpeg_standard_output << std::endl;
 		//this->set_progress(calculate_progress(process->readAllStandardError().toStdString()));
-//		std::cerr << ffmpeg_standard_output.substr(0, 6) << std::endl;
 		if (ffmpeg_standard_output.substr(0, 6) == "frame="){
 			this->set_progress(MainWindow::calculate_progress(ffmpeg_standard_output, this->get_total_time()));
 			emit progress_updated();
@@ -109,13 +105,9 @@ void MainWindow::convert_clicked(const QString &file_path)
 	QString source_file = " -i " + file_path;
 	QString convertion_configuration = " -vcodec dnxhd -acodec pcm_s16le -s 1920x1080 -r 30000/1001 -b:v 36M -pix_fmt yuv422p -f mov output.mov"; //TODO: Make this whole line dynamic based on user inputs
 
-	std::cerr << ffmpeg.toStdString() << source_file.toStdString() << convertion_configuration.toStdString() << std::endl;
-
-
 	process->start(ffmpeg + source_file + convertion_configuration);
 	connect(this, &MainWindow::destroyed, process, &QProcess::kill);
 
-	std::cout << "Waiting for process" << std::endl;
 	process->waitForFinished(); //TODO:Werk nie altyd nie??
 //	std::cout << "Done waiting" << std::endl;
 
@@ -124,6 +116,7 @@ void MainWindow::convert_clicked(const QString &file_path)
 
 float MainWindow::calculate_progress(std::string stdoutput_string, unsigned int media_duration)
 {
+	//TODO: Find index of "time="
 	std::string time_progress_hours = stdoutput_string.substr(47, 2);
 	std::string time_progress_minutes = stdoutput_string.substr(50, 2);
 	std::string time_progress_seconds = stdoutput_string.substr(53, 2);
@@ -139,6 +132,8 @@ float MainWindow::calculate_progress(std::string stdoutput_string, unsigned int 
 	if (hours >= 0 && minutes >= 0 && seconds >= 0) {
 		//std::cerr << hours << ":" << minutes << ":" << seconds << std::endl;
 		total_in_seconds = seconds + minutes * 60 + hours * 3600;
+		std::cerr << total_in_seconds << std::endl;
+		std::cerr << (float)total_in_seconds / (float)media_duration << std::endl;
 		return (float)total_in_seconds / (float)media_duration;
 	}
 

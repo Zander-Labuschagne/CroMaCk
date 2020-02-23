@@ -1,10 +1,5 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQuickWindow>
-#include <QQuickView>
-//#include <QQmlContext>
-#include <iostream>
-
 #include "mainwindow.hpp"
 
 int main(int argc, char *argv[])
@@ -13,17 +8,22 @@ int main(int argc, char *argv[])
 
 	QGuiApplication app(argc, argv);
 
-	qmlRegisterType<MainWindow>("Cryogen.MainWindow", 1, 0, "MainWindow");
-
 	MainWindow mw;
 
 	QQmlApplicationEngine engine;
-	engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-	if (engine.rootObjects().isEmpty())
-		return -1;
+	const QUrl url(QStringLiteral("qrc:/main.qml"));
+	QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+			 &app, [url](QObject *obj, const QUrl &objUrl) {
+		if (!obj && url == objUrl)
+			QCoreApplication::exit(-1);
+	}, Qt::QueuedConnection);
+	engine.load(url);
+	qmlRegisterType<MainWindow>("Cryogen.MainWindow", 1, 0, "MainWindow");
+
 
 	QObject::connect(engine.rootObjects().at(0), SIGNAL(convert(QString)), &mw, SLOT(convert_clicked(QString)));
 	QObject::connect(&mw, SIGNAL(conversion_done()),(QObject *)engine.rootObjects().at(0), SLOT(onConversionDone()));
+
 
 	return app.exec();
 }

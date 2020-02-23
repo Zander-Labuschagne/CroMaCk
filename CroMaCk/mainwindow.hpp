@@ -8,7 +8,7 @@
 class MainWindow : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(unsigned short progress READ get_progress WRITE set_progress NOTIFY progress_updated) // Read only
+	Q_PROPERTY(float progress READ get_progress WRITE set_progress NOTIFY progress_updated) // Read only
 public:
 	explicit MainWindow(QObject *parent = nullptr);
 	~MainWindow();

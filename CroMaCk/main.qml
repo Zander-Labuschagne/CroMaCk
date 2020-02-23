@@ -3,8 +3,6 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.2
 import QtQml 2.12
-import Cryogen.MainWindow 1.0
-
 
 Window {
 	//Main window properties
@@ -13,9 +11,6 @@ Window {
 	height: 480;
 	title: qsTr("CroMaCk");
 
-	MainWindow {
-		id: main_window;
-	}
 
 	//signals
 	signal convert(string file_path);
@@ -26,6 +21,7 @@ Window {
 		console.log('DONE!');
 		messageDialog.open();
 	}
+
 
 	MessageDialog {
 		id: conversion_complete;
