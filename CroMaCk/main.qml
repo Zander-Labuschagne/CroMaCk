@@ -22,7 +22,6 @@ Window {
 		messageDialog.open();
 	}
 
-
 	MessageDialog {
 		id: conversion_complete;
 		title: "Conversion Completed";
@@ -87,6 +86,6 @@ Window {
 		y: convert_button.y + convert_button.height + 10;
 		width: 500;
 		height: 70;
-		value: main_window.progress;
+		value: mw_controller.progress;
 	}
 }

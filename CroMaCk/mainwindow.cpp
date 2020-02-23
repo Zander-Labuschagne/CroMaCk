@@ -6,6 +6,9 @@
 #include <QDebug>
 #include <QThread>
 
+#include <QAbstractEventDispatcher>
+
+
 #include "mainwindow.hpp"
 
 
@@ -42,7 +45,7 @@ void MainWindow::conversion_done_bridge()
 {
 	std::cerr << "Done waiting" << std::endl;
 
-	QThread::sleep(2);
+//	QThread::sleep(2);
 
 	emit conversion_done();
 }
@@ -94,6 +97,8 @@ void MainWindow::convert_clicked(const QString &file_path)
 		if (ffmpeg_standard_output.substr(0, 6) == "frame="){
 			this->set_progress(MainWindow::calculate_progress(ffmpeg_standard_output, this->get_total_time()));
 			emit progress_updated();
+			emit progressUpdated();
+			this->thread()->eventDispatcher()->processEvents(QEventLoop::AllEvents);
 			std::cerr << this->get_progress() << std::endl;
 		}
 	});
@@ -105,10 +110,12 @@ void MainWindow::convert_clicked(const QString &file_path)
 	QString source_file = " -i " + file_path;
 	QString convertion_configuration = " -vcodec dnxhd -acodec pcm_s16le -s 1920x1080 -r 30000/1001 -b:v 36M -pix_fmt yuv422p -f mov output.mov"; //TODO: Make this whole line dynamic based on user inputs
 
-	process->start(ffmpeg + source_file + convertion_configuration);
+
+
+	process->start(ffmpeg + source_file + convertion_configuration);//TODO: On new thread
 	connect(this, &MainWindow::destroyed, process, &QProcess::kill);
 
-	process->waitForFinished(); //TODO:Werk nie altyd nie??
+	//process->waitForFinished(); //TODO:Werk nie altyd nie??
 //	std::cout << "Done waiting" << std::endl;
 
 //	emit conversion_done();
