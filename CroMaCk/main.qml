@@ -1,8 +1,8 @@
+import QtQml 2.12
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.2
-import QtQml 2.12
 
 Window {
 	//Main window properties
@@ -15,12 +15,12 @@ Window {
 	//signals
 	signal convert(string file_path);
 
-	//slots
-	function onConversionDone()
-	{
-		console.log('DONE!');
-		messageDialog.open();
-	}
+	Connections {
+		target: mw_controller
+		onConversionDone: {
+			conversion_complete.open();
+		}
+	    }
 
 	MessageDialog {
 		id: conversion_complete;
@@ -40,13 +40,11 @@ Window {
 		height: 720;
 //		nameFilters: [ "Image files (*.jpg *.png)", "All files (*)" ]
 		onAccepted: {
-			//console.log("You chose: " + fileDialog.fileUrl)
 			filename_label.text = file_dialog.fileUrl.toString().substring(file_dialog.fileUrl.toString().lastIndexOf('/') + 1, file_dialog.fileUrl.toString().length);
 			//TODO: Check somehow if the file is valid
 			convert_button.enabled = true; //TODO: If the file is valid as checked above
 		}
 		onRejected: {
-			console.log("Canceled")
 //			file_dialog.close();
 		}
 //		Component.onCompleted: visible = true

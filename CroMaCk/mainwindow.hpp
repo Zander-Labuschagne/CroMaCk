@@ -12,7 +12,7 @@ class MainWindow : public QObject
 public:
 	explicit MainWindow(QObject *parent = nullptr);
 	~MainWindow();
-	Q_INVOKABLE float get_progress();
+	float get_progress();
 	static float calculate_progress(std::string stdoutput_string, unsigned int media_duration);
 	unsigned int get_total_time();
 
@@ -22,8 +22,7 @@ public slots:
 	void conversion_done_bridge();
 	void handle_process_error();
 signals:
-	void conversion_done();
-	void progress_updated();
+	void conversionDone();
 	void progressUpdated();
 private:
 	float conversion_progress;

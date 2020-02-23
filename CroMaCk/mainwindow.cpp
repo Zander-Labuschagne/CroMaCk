@@ -3,9 +3,7 @@
 #include <iostream>
 
 #include <QProcess>
-#include <QDebug>
 #include <QThread>
-
 #include <QAbstractEventDispatcher>
 
 
@@ -43,11 +41,7 @@ void MainWindow::execute_on_stdout(QProcess *process)
 
 void MainWindow::conversion_done_bridge()
 {
-	std::cerr << "Done waiting" << std::endl;
-
-//	QThread::sleep(2);
-
-	emit conversion_done();
+	emit conversionDone();
 }
 
 void MainWindow::handle_process_error()
@@ -96,7 +90,6 @@ void MainWindow::convert_clicked(const QString &file_path)
 		//this->set_progress(calculate_progress(process->readAllStandardError().toStdString()));
 		if (ffmpeg_standard_output.substr(0, 6) == "frame="){
 			this->set_progress(MainWindow::calculate_progress(ffmpeg_standard_output, this->get_total_time()));
-			emit progress_updated();
 			emit progressUpdated();
 			this->thread()->eventDispatcher()->processEvents(QEventLoop::AllEvents);
 			std::cerr << this->get_progress() << std::endl;
@@ -112,13 +105,10 @@ void MainWindow::convert_clicked(const QString &file_path)
 
 
 
-	process->start(ffmpeg + source_file + convertion_configuration);//TODO: On new thread
+	process->start(ffmpeg + source_file + convertion_configuration);
 	connect(this, &MainWindow::destroyed, process, &QProcess::kill);
 
-	//process->waitForFinished(); //TODO:Werk nie altyd nie??
-//	std::cout << "Done waiting" << std::endl;
-
-//	emit conversion_done();
+	//process->waitForFinished();
 }
 
 float MainWindow::calculate_progress(std::string stdoutput_string, unsigned int media_duration)
@@ -128,8 +118,6 @@ float MainWindow::calculate_progress(std::string stdoutput_string, unsigned int 
 		std::string time_progress_hours = stdoutput_string.substr(start_index_of_time_indication + 5, 2);
 		std::string time_progress_minutes = stdoutput_string.substr(start_index_of_time_indication + 8, 2);
 		std::string time_progress_seconds = stdoutput_string.substr(start_index_of_time_indication + 11, 2);
-		std::cerr << time_progress_hours << ":" << time_progress_minutes << ":" << time_progress_seconds << std::endl;
-		std::cerr << media_duration << std::endl;
 		short hours = std::stoi(time_progress_hours);
 		short minutes = std::stoi(time_progress_minutes);
 		short seconds = std::stoi(time_progress_seconds);
@@ -138,8 +126,6 @@ float MainWindow::calculate_progress(std::string stdoutput_string, unsigned int 
 		if (hours >= 0 && minutes >= 0 && seconds >= 0) {
 			//std::cerr << hours << ":" << minutes << ":" << seconds << std::endl;
 			total_in_seconds = seconds + minutes * 60 + hours * 3600;
-			std::cerr << total_in_seconds << std::endl;
-			std::cerr << (float)total_in_seconds / (float)media_duration << std::endl;
 			return (float)total_in_seconds / (float)media_duration;
 		}
 	}
